@@ -1,0 +1,48 @@
+FARMER:
+  1:
+    material: POTATO
+    price: 10.0
+    stock: 64
+    refill: 60
+  2:
+    material: CARROT
+    price: 15.0
+    stock: 32
+    refill: 120
+  3:
+    material: WHEAT
+    price: 20.0
+    stock: 16
+    refill: 300
+ALCHEMIST:
+  1:
+    material: GLASS_BOTTLE
+    price: 5.0
+    stock: 64
+    refill: 60
+  2:
+    material: NETHER_WART
+    price: 50.0
+    stock: 10
+    refill: 600
+  3:
+    material: BLAZE_ROD
+    price: 100.0
+    stock: 5
+    refill: 1200
+WEAPONS:
+  1:
+    material: WOODEN_SWORD
+    price: 10.0
+    stock: 1
+    refill: 60
+  2:
+    material: STONE_AXE
+    price: 50.0
+    stock: 1
+    refill: 600
+  3:
+    material: IRON_SWORD
+    price: 200.0
+    stock: 1
+    refill: 3600

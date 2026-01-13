@@ -1,0 +1,35 @@
+name: AtheriumQuest
+version: 1.0-SNAPSHOT
+main: ua.atherium.atheriumquest.AtheriumQuest
+api-version: 1.21
+author: Oleze_bebidjonov
+commands:
+  atq:
+    description: Main admin command for AtheriumQuest
+    usage: /atq <subcommand>
+    permission: atq.admin
+  fermer:
+    description: Open the Farmer quest menu
+    usage: /fermer
+    permission: atq.command.fermer
+  alximik:
+    description: Open the Alchemist quest menu
+    usage: /alximik
+    permission: atq.command.alximik
+  weapons:
+    description: Open the Weaponsmith quest menu
+    usage: /weapons
+    permission: atq.command.weapons
+permissions:
+  atq.admin:
+    description: Allows full access to AtheriumQuest admin commands
+    default: op
+  atq.command.fermer:
+    description: Allows opening the Farmer menu
+    default: true
+  atq.command.alximik:
+    description: Allows opening the Alchemist menu
+    default: true
+  atq.command.weapons:
+    description: Allows opening the Weaponsmith menu
+    default: true

@@ -1,0 +1,20 @@
+quests_1:
+  tasks:
+    - "plant_potato 10" # Посадить 10 картофеля
+    - "kill_pig 5"      # Убить 5 свиней
+  rewards:
+    - "eco give %player% 500"
+    - "give %player% apple 10"
+    - "msg %player% &aВы отлично справились с первым уровнем!"
+
+quests_2:
+  tasks:
+    - "harvest_wheat 20"
+  rewards:
+    - "atq skip %player% fermer 1"
+
+quests_3:
+  tasks:
+    - "break_log 50"
+  rewards:
+    - "msg %player% <gradient:#ff0000:#ffff00>Поздравляем! Вы прошли все квесты Фермера!</gradient>"

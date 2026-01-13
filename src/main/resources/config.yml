@@ -1,0 +1,25 @@
+database:
+  type: sqlite
+  sqlite:
+    file: "database.db"
+
+# Настройки сообщений с поддержкой RGB &#RRGGBB и градиентов MiniMessage
+messages:
+  prefix: "<gradient:#ffaa00:#ff5500>AtheriumQuest</gradient> <gray>»</gray> "
+  no_permission: "<red>У вас нет прав на выполнение этой команды."
+  reload_success: "<green>Конфигурация перезагружена."
+  level_up: "<gradient:#ffaa00:#ff5500>Добро пожаловать на {level} уровень!</gradient>"
+  shop_locked: "<red>Заблокировано"
+  shop_locked_lore:
+    - "<gray>Пройдите квесты NPC"
+  shop_restock_timer: "<gray>Обновление через: <#00ff00>{time}с" # Поддержка RGB для таймера
+
+# Настройки меню
+menus:
+  shop:
+    title: "<gradient:#00aaff:#0055ff>Магазин квестов</gradient>"
+    rows: 6
+    filler:
+      material: GRAY_STAINED_GLASS_PANE
+      # Слоты, которые будут заполнены, если не заняты предметами.
+      # Логика кода будет заполнять все пустые слоты, если список пуст или опущен.
