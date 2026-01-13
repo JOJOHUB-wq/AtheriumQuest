@@ -1,17 +1,15 @@
-quests_1:
-  tasks:
-    - "brew_potion 3"
-  rewards:
-    - "give %player% glass_bottle 10"
+level_1:
+  quests_list:
+    - id: "q1"
+      tasks:
+        - "brew_potion 3"
+      rewards:
+        - "give %player_name% glass_bottle 10"
 
-quests_2:
-  tasks:
-    - "eat_food 10"
-  rewards:
-    - "eco give %player% 200"
-
-quests_3:
-  tasks:
-    - "collect_reagents SPIDER_EYE 5"
-  rewards:
-    - "msg %player% <green>Алхимик доволен!"
+level_2:
+  quests_list:
+    - id: "q2"
+      tasks:
+        - "eat_food 10"
+      rewards:
+        - "eco give %player_name% 200"

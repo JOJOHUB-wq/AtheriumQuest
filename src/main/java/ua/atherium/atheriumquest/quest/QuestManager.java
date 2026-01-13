@@ -11,14 +11,16 @@ import ua.atherium.atheriumquest.AtheriumQuest;
 
 public class QuestManager {
     private final AtheriumQuest plugin;
-    private final Map<NpcType, Map<Integer, QuestLevel>> quests = new HashMap<>();
+    private final Map<NpcType, Map<Integer, QuestLevel>> npcLevels = new HashMap<>();
+    private final Map<NpcType, Map<String, Quest>> questIdMap = new HashMap<>();
 
     public QuestManager(AtheriumQuest plugin) {
         this.plugin = plugin;
     }
 
     public void loadQuests() {
-        quests.clear();
+        npcLevels.clear();
+        questIdMap.clear();
         loadNpcQuest(NpcType.FARMER, "farmer.yml");
         loadNpcQuest(NpcType.ALCHEMIST, "alchemist.yml");
         loadNpcQuest(NpcType.WEAPONS, "weapons.yml");
@@ -32,35 +34,54 @@ public class QuestManager {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
 
         Map<Integer, QuestLevel> levels = new HashMap<>();
+        Map<String, Quest> idMap = new HashMap<>();
 
-        for (int i = 1; i <= 3; i++) {
-            String key = "quests_" + i;
-            if (config.contains(key)) {
-                List<QuestTask> taskList = new ArrayList<>();
-                List<String> tasks = config.getStringList(key + ".tasks");
+        for (String key : config.getKeys(false)) {
+            if (key.startsWith("level_")) {
+                try {
+                    int levelNum = Integer.parseInt(key.replace("level_", ""));
+                    List<Quest> levelQuests = new ArrayList<>();
 
-                for (String taskStr : tasks) {
-                    String[] parts = taskStr.split(" ");
-                    if (parts.length >= 2) {
-                         String tType = parts[0];
-                         int amount = Integer.parseInt(parts[1]);
+                    List<Map<?, ?>> list = config.getMapList(key + ".quests_list");
+                    for (Map<?, ?> qMap : list) {
+                        String id = (String) qMap.get("id");
+                        List<String> taskStrs = (List<String>) qMap.get("tasks");
+                        List<String> rewardStrs = (List<String>) qMap.get("rewards");
 
-                         String target = "";
-                         if (parts.length > 2) target = parts[1];
-                         if (parts.length > 2) amount = Integer.parseInt(parts[2]);
+                        List<QuestTask> tasks = new ArrayList<>();
+                        for (String tStr : taskStrs) {
+                            String[] parts = tStr.split(" ");
+                            if (parts.length >= 2) {
+                                String tType = parts[0];
+                                int amount = Integer.parseInt(parts[1]);
+                                String target = "";
+                                if (parts.length > 2) target = parts[1];
+                                if (parts.length > 2) amount = Integer.parseInt(parts[2]);
+                                tasks.add(new QuestTask(tType, target, amount));
+                            }
+                        }
 
-                         taskList.add(new QuestTask(tType, target, amount));
+                        Quest quest = new Quest(id, tasks, rewardStrs);
+                        levelQuests.add(quest);
+                        idMap.put(id, quest);
                     }
-                }
 
-                List<String> rewards = config.getStringList(key + ".rewards");
-                levels.put(i, new QuestLevel(i, taskList, rewards));
+                    levels.put(levelNum, new QuestLevel(levelNum, levelQuests));
+                } catch (Exception e) {
+                    plugin.getLogger().severe("Error loading level " + key + " for " + type);
+                    e.printStackTrace();
+                }
             }
         }
-        quests.put(type, levels);
+        npcLevels.put(type, levels);
+        questIdMap.put(type, idMap);
     }
 
-    public QuestLevel getQuestLevel(NpcType type, int level) {
-        return quests.getOrDefault(type, new HashMap<>()).get(level);
+    public QuestLevel getLevel(NpcType type, int level) {
+        return npcLevels.getOrDefault(type, new HashMap<>()).get(level);
+    }
+
+    public Quest getQuestById(NpcType type, String id) {
+        return questIdMap.getOrDefault(type, new HashMap<>()).get(id);
     }
 }

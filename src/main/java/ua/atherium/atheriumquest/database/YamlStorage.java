@@ -17,6 +17,17 @@ public class YamlStorage implements Storage {
     }
 
     @Override
+    public int getQuestIndex(UUID uuid, String npcType) {
+        return config.getInt(uuid.toString() + "." + npcType + ".questIndex", 0);
+    }
+
+    @Override
+    public void setQuestIndex(UUID uuid, String npcType, int index) {
+        config.set(uuid.toString() + "." + npcType + ".questIndex", index);
+        save();
+    }
+
+    @Override
     public void init() {
         file = new File(plugin.getDataFolder(), "balances.yml");
         if (!file.exists()) {

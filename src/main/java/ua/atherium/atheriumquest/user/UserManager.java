@@ -29,6 +29,9 @@ public class UserManager {
             profile.setLevel(NpcType.FARMER, storage.getLevel(uuid, "FARMER"));
             profile.setLevel(NpcType.ALCHEMIST, storage.getLevel(uuid, "ALCHEMIST"));
             profile.setLevel(NpcType.WEAPONS, storage.getLevel(uuid, "WEAPONS"));
+            profile.setQuestIndex(NpcType.FARMER, storage.getQuestIndex(uuid, "FARMER"));
+            profile.setQuestIndex(NpcType.ALCHEMIST, storage.getQuestIndex(uuid, "ALCHEMIST"));
+            profile.setQuestIndex(NpcType.WEAPONS, storage.getQuestIndex(uuid, "WEAPONS"));
             Map<String, Integer> progress = storage.getProgress(uuid);
             for (Map.Entry<String, Integer> entry : progress.entrySet()) {
                 profile.setProgress(entry.getKey(), entry.getValue());
@@ -45,6 +48,9 @@ public class UserManager {
                 storage.setLevel(uuid, "FARMER", profile.getLevel(NpcType.FARMER));
                 storage.setLevel(uuid, "ALCHEMIST", profile.getLevel(NpcType.ALCHEMIST));
                 storage.setLevel(uuid, "WEAPONS", profile.getLevel(NpcType.WEAPONS));
+                storage.setQuestIndex(uuid, "FARMER", profile.getQuestIndex(NpcType.FARMER));
+                storage.setQuestIndex(uuid, "ALCHEMIST", profile.getQuestIndex(NpcType.ALCHEMIST));
+                storage.setQuestIndex(uuid, "WEAPONS", profile.getQuestIndex(NpcType.WEAPONS));
                 storage.saveProgress(uuid, profile.getProgressMap());
             }
         }

@@ -1,20 +1,23 @@
-quests_1:
-  tasks:
-    - "plant_potato 10" # Посадить 10 картофеля
-    - "kill_pig 5"      # Убить 5 свиней
-  rewards:
-    - "eco give %player% 500"
-    - "give %player% apple 10"
-    - "msg %player% &aВы отлично справились с первым уровнем!"
+level_1:
+  quests_list:
+    - id: "q1"
+      tasks:
+        - "plant_potato 10"
+        - "break_log 5"
+      rewards:
+        - "eco give %player_name% 100"
+        - "msg %player_name% &#00FF00Квест 1 завершен!"
+    - id: "q2"
+      tasks:
+        - "harvest_wheat 20"
+      rewards:
+        - "give %player_name% diamond 1"
+        - "msg %player_name% &#00FF00Уровень 1 завершен!"
 
-quests_2:
-  tasks:
-    - "harvest_wheat 20"
-  rewards:
-    - "atq skip %player% fermer 1"
-
-quests_3:
-  tasks:
-    - "break_log 50"
-  rewards:
-    - "msg %player% <gradient:#ff0000:#ffff00>Поздравляем! Вы прошли все квесты Фермера!</gradient>"
+level_2:
+  quests_list:
+    - id: "q3"
+      tasks:
+        - "shear_sheep 5"
+      rewards:
+        - "eco give %player_name% 500"

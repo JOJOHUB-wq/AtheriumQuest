@@ -1,0 +1,31 @@
+menu_title: "&#FF5555Квесты Фермера"
+size: 27
+items:
+  q1:
+    slot: 10
+    material: POTATO
+    name: "&#FFAA00Первое испытание"
+    lore:
+      - "&7Посадите 10 картофеля"
+      - "&7Срубите 5 дерева"
+      - ""
+      - "&7Статус: %status%"
+      - "&7Прогресс: %progress%"
+  q2:
+    slot: 11
+    material: WHEAT
+    name: "&#FFAA00Второе испытание"
+    lore:
+      - "&7Соберите 20 пшеницы"
+      - ""
+      - "&7Статус: %status%"
+      - "&7Прогресс: %progress%"
+  q3:
+    slot: 12
+    material: SHEARS
+    name: "&#FFAA00Третье испытание"
+    lore:
+      - "&7Постригите 5 овец"
+      - ""
+      - "&7Статус: %status%"
+      - "&7Прогресс: %progress%"

@@ -4,24 +4,18 @@ import java.util.List;
 
 public class QuestLevel {
     private final int levelNumber;
-    private final List<QuestTask> tasks;
-    private final List<String> rewards;
+    private final List<Quest> quests;
 
-    public QuestLevel(int levelNumber, List<QuestTask> tasks, List<String> rewards) {
+    public QuestLevel(int levelNumber, List<Quest> quests) {
         this.levelNumber = levelNumber;
-        this.tasks = tasks;
-        this.rewards = rewards;
+        this.quests = quests;
     }
 
     public int getLevelNumber() {
         return levelNumber;
     }
 
-    public List<QuestTask> getTasks() {
-        return tasks;
-    }
-
-    public List<String> getRewards() {
-        return rewards;
+    public List<Quest> getQuests() {
+        return quests;
     }
 }

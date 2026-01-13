@@ -25,31 +25,7 @@ public class MenuCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-
-        ua.atherium.atheriumquest.user.UserProfile profile = plugin.getUserManager().getUser(player.getUniqueId());
-        int currentLevel = profile.getLevel(type);
-        ua.atherium.atheriumquest.quest.QuestLevel qLevel = plugin.getQuestManager().getQuestLevel(type, currentLevel);
-
-        if (qLevel != null) {
-            boolean allComplete = true;
-            for (int i = 0; i < qLevel.getTasks().size(); i++) {
-                 String key = type.name() + "_" + currentLevel + "_" + i;
-                 if (profile.getProgress(key) < qLevel.getTasks().get(i).getAmount()) {
-                     allComplete = false;
-                     break;
-                 }
-            }
-
-            if (allComplete) {
-                profile.setLevel(type, currentLevel + 1);
-                plugin.getUserManager().saveUser(player.getUniqueId());
-
-                String msg = plugin.getConfigManager().getConfig().getString("messages.level_up", "Level {level}").replace("{level}", String.valueOf(currentLevel + 1));
-                player.sendMessage(plugin.getConfigManager().parse(msg));
-            }
-        }
-
-        new ua.atherium.atheriumquest.shop.ShopMenu(plugin, player).open();
+        new ua.atherium.atheriumquest.gui.QuestGui(plugin, player, type).open();
         return true;
     }
 }

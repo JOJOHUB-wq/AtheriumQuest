@@ -7,6 +7,8 @@ public interface Storage {
     void close();
     int getLevel(UUID uuid, String npcType);
     void setLevel(UUID uuid, String npcType, int level);
+    int getQuestIndex(UUID uuid, String npcType);
+    void setQuestIndex(UUID uuid, String npcType, int index);
     java.util.Map<String, Integer> getProgress(UUID uuid);
     void saveProgress(UUID uuid, java.util.Map<String, Integer> progress);
 

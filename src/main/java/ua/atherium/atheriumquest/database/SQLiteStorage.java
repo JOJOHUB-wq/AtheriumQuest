@@ -34,6 +34,7 @@ public class SQLiteStorage implements Storage {
                         "uuid VARCHAR(36) NOT NULL, " +
                         "npc_type VARCHAR(32) NOT NULL, " +
                         "level INTEGER DEFAULT 1, " +
+                        "quest_index INTEGER DEFAULT 0, " +
                         "PRIMARY KEY (uuid, npc_type))");
                 statement.execute("CREATE TABLE IF NOT EXISTS quest_progress (" +
                         "uuid VARCHAR(36) NOT NULL, " +
@@ -83,7 +84,7 @@ public class SQLiteStorage implements Storage {
 
     @Override
     public void setLevel(UUID uuid, String npcType, int level) {
-        String sql = "INSERT OR REPLACE INTO player_levels (uuid, npc_type, level) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO player_levels (uuid, npc_type, level) VALUES (?, ?, ?) ON CONFLICT(uuid, npc_type) DO UPDATE SET level=excluded.level";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, uuid.toString());
             ps.setString(2, npcType);
@@ -91,6 +92,36 @@ public class SQLiteStorage implements Storage {
             ps.executeUpdate();
         } catch (SQLException e) {
             plugin.getLogger().severe("Error setting level: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public int getQuestIndex(UUID uuid, String npcType) {
+        String sql = "SELECT quest_index FROM player_levels WHERE uuid = ? AND npc_type = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, uuid.toString());
+            ps.setString(2, npcType);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("quest_index");
+                }
+            }
+        } catch (SQLException e) {
+            plugin.getLogger().severe("Error getting quest index: " + e.getMessage());
+        }
+        return 0;
+    }
+
+    @Override
+    public void setQuestIndex(UUID uuid, String npcType, int index) {
+        String sql = "INSERT INTO player_levels (uuid, npc_type, quest_index) VALUES (?, ?, ?) ON CONFLICT(uuid, npc_type) DO UPDATE SET quest_index=excluded.quest_index";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, uuid.toString());
+            ps.setString(2, npcType);
+            ps.setInt(3, index);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            plugin.getLogger().severe("Error setting quest index: " + e.getMessage());
         }
     }
 

@@ -81,19 +81,22 @@ public class ShopEditorListener implements Listener {
             EditorAction action = editors.get(player.getUniqueId());
             if (action != null) {
                 event.setCancelled(true);
-                try {
-                    double val = Double.parseDouble(event.getMessage());
-                    ShopItem item = plugin.getShopManager().getItem(action.type, action.level);
-                    if (item != null) {
-                        if (action.field.equals("stock")) item.setMaxStock((int)val);
-                        if (action.field.equals("price")) item.setPrice(val);
-                        plugin.getShopManager().saveShops();
-                        player.sendMessage("Updated " + action.field + " to " + val);
+                String msg = event.getMessage();
+                org.bukkit.Bukkit.getScheduler().runTask(plugin, () -> {
+                    try {
+                        double val = Double.parseDouble(msg);
+                        ShopItem item = plugin.getShopManager().getItem(action.type, action.level);
+                        if (item != null) {
+                            if (action.field.equals("stock")) item.setMaxStock((int)val);
+                            if (action.field.equals("price")) item.setPrice(val);
+                            plugin.getShopManager().saveShops();
+                            player.sendMessage("Updated " + action.field + " to " + val);
+                        }
+                    } catch (NumberFormatException e) {
+                        player.sendMessage("Invalid number.");
                     }
-                } catch (NumberFormatException e) {
-                    player.sendMessage("Invalid number.");
-                }
-                editors.put(player.getUniqueId(), null);
+                    editors.put(player.getUniqueId(), null);
+                });
             }
         }
     }

@@ -11,6 +11,7 @@ public class AtheriumQuest extends JavaPlugin {
     private ua.atherium.atheriumquest.shop.ShopManager shopManager;
     private ua.atherium.atheriumquest.shop.EconomyManager economyManager;
     private ua.atherium.atheriumquest.shop.ShopEditorListener shopEditorListener;
+    private ua.atherium.atheriumquest.gui.MenuManager menuManager;
 
     @Override
     public void onEnable() {
@@ -20,6 +21,8 @@ public class AtheriumQuest extends JavaPlugin {
 
         questManager = new ua.atherium.atheriumquest.quest.QuestManager(this);
         questManager.loadQuests();
+
+        menuManager = new ua.atherium.atheriumquest.gui.MenuManager(this);
 
         userManager = new ua.atherium.atheriumquest.user.UserManager(this);
 
@@ -79,5 +82,9 @@ public class AtheriumQuest extends JavaPlugin {
 
     public ua.atherium.atheriumquest.shop.ShopEditorListener getShopEditorListener() {
         return shopEditorListener;
+    }
+
+    public ua.atherium.atheriumquest.gui.MenuManager getMenuManager() {
+        return menuManager;
     }
 }

@@ -1,0 +1,21 @@
+menu_title: "&#FF5555Квесты Оружейника"
+size: 27
+items:
+  q1:
+    slot: 10
+    material: IRON_SWORD
+    name: "&#FF0000Охота на зомби"
+    lore:
+      - "&7Убейте 5 зомби"
+      - ""
+      - "&7Статус: %status%"
+      - "&7Прогресс: %progress%"
+  q2:
+    slot: 11
+    material: CRAFTING_TABLE
+    name: "&#FF0000Ковка"
+    lore:
+      - "&7Скрафтите меч"
+      - ""
+      - "&7Статус: %status%"
+      - "&7Прогресс: %progress%"

@@ -10,8 +10,12 @@
 /app/src/main/java/ua/atherium/atheriumquest/gui/GuiListener.java
 /app/src/main/java/ua/atherium/atheriumquest/gui/Menu.java
 /app/src/main/java/ua/atherium/atheriumquest/gui/MenuConfig.java
+/app/src/main/java/ua/atherium/atheriumquest/gui/MenuManager.java
+/app/src/main/java/ua/atherium/atheriumquest/gui/QuestGui.java
+/app/src/main/java/ua/atherium/atheriumquest/gui/QuestMenuItem.java
 /app/src/main/java/ua/atherium/atheriumquest/npc/NpcListener.java
 /app/src/main/java/ua/atherium/atheriumquest/quest/NpcType.java
+/app/src/main/java/ua/atherium/atheriumquest/quest/Quest.java
 /app/src/main/java/ua/atherium/atheriumquest/quest/QuestLevel.java
 /app/src/main/java/ua/atherium/atheriumquest/quest/QuestListener.java
 /app/src/main/java/ua/atherium/atheriumquest/quest/QuestManager.java

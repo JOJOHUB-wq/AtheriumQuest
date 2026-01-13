@@ -1,7 +1,9 @@
+ua/atherium/atheriumquest/gui/MenuManager$MenuConfig.class
 ua/atherium/atheriumquest/command/AdminCommand.class
 ua/atherium/atheriumquest/quest/QuestTask.class
 ua/atherium/atheriumquest/database/DatabaseManager.class
 ua/atherium/atheriumquest/quest/QuestManager.class
+ua/atherium/atheriumquest/gui/MenuManager.class
 ua/atherium/atheriumquest/gui/GuiListener.class
 ua/atherium/atheriumquest/shop/ShopEditorListener.class
 ua/atherium/atheriumquest/database/YamlStorage.class
@@ -15,6 +17,8 @@ ua/atherium/atheriumquest/shop/ShopMenu$1.class
 ua/atherium/atheriumquest/gui/MenuConfig.class
 ua/atherium/atheriumquest/ConfigManager.class
 ua/atherium/atheriumquest/shop/ShopManager.class
+ua/atherium/atheriumquest/gui/QuestMenuItem.class
+ua/atherium/atheriumquest/quest/Quest.class
 ua/atherium/atheriumquest/user/UserManager.class
 ua/atherium/atheriumquest/database/SQLiteStorage.class
 ua/atherium/atheriumquest/AtheriumQuest.class
@@ -26,4 +30,5 @@ ua/atherium/atheriumquest/quest/QuestListener.class
 ua/atherium/atheriumquest/gui/Menu.class
 ua/atherium/atheriumquest/command/MenuCommand.class
 ua/atherium/atheriumquest/command/NpcCommand.class
+ua/atherium/atheriumquest/gui/QuestGui.class
 ua/atherium/atheriumquest/shop/ShopEditorListener$EditorAction.class
