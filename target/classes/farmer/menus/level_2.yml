@@ -1,0 +1,12 @@
+menu_title: "&#FF5555Фермер | Уровень 2"
+size: 27
+items:
+  q1:
+    slot: 10
+    material: SHEARS
+    name: "&#FFAA00Стрижка овец"
+    lore:
+      - "&7Постригите 5 овец"
+      - ""
+      - "&7Статус: %status%"
+      - "&7Прогресс: %progress%"

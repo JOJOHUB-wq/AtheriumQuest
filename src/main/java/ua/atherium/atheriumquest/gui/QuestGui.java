@@ -30,75 +30,79 @@ public class QuestGui extends Menu {
     }
 
     public void open() {
-        MenuManager.MenuConfig menuConfig = plugin.getMenuManager().getMenuConfig(npcType);
-        if (menuConfig == null) {
-            player.sendMessage("Menu config not found for " + npcType);
-            return;
-        }
-
-        Inventory inv = Bukkit.createInventory(this, menuConfig.rows() * 9, plugin.getConfigManager().parse(menuConfig.title()));
-        updateInventory(inv);
-        player.openInventory(inv);
-    }
-
-    private void updateInventory(Inventory inv) {
         UserProfile profile = plugin.getUserManager().getUser(player.getUniqueId());
         int currentLevelNum = profile.getLevel(npcType);
-        int questIndex = profile.getQuestIndex(npcType);
 
-        QuestLevel level = plugin.getQuestManager().getLevel(npcType, currentLevelNum);
+        MenuManager.MenuConfig menuConfig = plugin.getMenuManager().getMenuConfig(npcType, currentLevelNum);
 
-        if (level != null) {
-            List<Quest> quests = level.getQuests();
-            for (int i = 0; i < quests.size(); i++) {
-                Quest quest = quests.get(i);
-                QuestMenuItem visual = plugin.getMenuManager().getMenuItem(npcType, quest.getId());
-
-                if (visual != null) {
-                    ItemStack is = new ItemStack(visual.material());
-                    ItemMeta meta = is.getItemMeta();
-                    meta.displayName(plugin.getConfigManager().parse(visual.name()));
-
-                    List<Component> lore = new ArrayList<>();
-
-                    String status = "Locked";
-                    if (i < questIndex) status = "Completed";
-                    else if (i == questIndex) status = "Active";
-
-                    String progressStr = "";
-                    if (i == questIndex) {
-                        StringBuilder sb = new StringBuilder();
-                        for (int t = 0; t < quest.getTasks().size(); t++) {
-                             QuestTask task = quest.getTasks().get(t);
-                             String key = npcType.name() + "_" + currentLevelNum + "_" + i + "_" + t;
-                             int current = profile.getProgress(key);
-                             sb.append(task.getType()).append(": ").append(current).append("/").append(task.getAmount());
-                             if (t < quest.getTasks().size() - 1) sb.append(", ");
-                        }
-                        progressStr = sb.toString();
-                    } else if (i < questIndex) {
-                        progressStr = "100%";
-                    } else {
-                        progressStr = "0%";
-                    }
-
-                    for (String line : visual.lore()) {
-                         String formatted = line.replace("%status%", status).replace("%progress%", progressStr);
-                         lore.add(plugin.getConfigManager().parse(formatted));
-                    }
-
-                    meta.lore(lore);
-                    is.setItemMeta(meta);
-
-                    inv.setItem(visual.slot(), is);
-                }
-            }
-        } else {
+        if (menuConfig == null) {
              ItemStack is = new ItemStack(Material.EMERALD_BLOCK);
              ItemMeta meta = is.getItemMeta();
              meta.displayName(plugin.getConfigManager().parse("<green>Completed!"));
              is.setItemMeta(meta);
+
+             Inventory inv = Bukkit.createInventory(this, 27, plugin.getConfigManager().parse("<green>Completed"));
              inv.setItem(13, is);
+             player.openInventory(inv);
+             return;
+        }
+
+        Inventory inv = Bukkit.createInventory(this, menuConfig.rows() * 9, plugin.getConfigManager().parse(menuConfig.title()));
+        updateInventory(inv, menuConfig, currentLevelNum, profile);
+        player.openInventory(inv);
+    }
+
+    private void updateInventory(Inventory inv, MenuManager.MenuConfig menuConfig, int currentLevelNum, UserProfile profile) {
+        java.util.Map<String, Quest> logicQuests = plugin.getQuestManager().getLevelQuests(npcType, currentLevelNum);
+        if (logicQuests == null) return;
+
+        List<String> questIds = new ArrayList<>(logicQuests.keySet());
+
+        int currentIndex = profile.getQuestIndex(npcType);
+
+        for (int i = 0; i < questIds.size(); i++) {
+            String qId = questIds.get(i);
+            Quest quest = logicQuests.get(qId);
+            QuestMenuItem visual = menuConfig.items().get(qId);
+
+            if (visual != null) {
+                ItemStack is = new ItemStack(visual.material());
+                ItemMeta meta = is.getItemMeta();
+                meta.displayName(plugin.getConfigManager().parse(visual.name()));
+
+                List<Component> lore = new ArrayList<>();
+
+                String status = "Locked";
+                if (i < currentIndex) status = "Completed";
+                else if (i == currentIndex) status = "Active";
+
+                String progressStr = "";
+                if (i == currentIndex) {
+                    StringBuilder sb = new StringBuilder();
+                    for (int t = 0; t < quest.getTasks().size(); t++) {
+                         QuestTask task = quest.getTasks().get(t);
+                         String key = npcType.name() + "_" + currentLevelNum + "_" + qId + "_" + t;
+                         int current = profile.getProgress(key);
+                         sb.append(task.getType()).append(": ").append(current).append("/").append(task.getAmount());
+                         if (t < quest.getTasks().size() - 1) sb.append(", ");
+                    }
+                    progressStr = sb.toString();
+                } else if (i < currentIndex) {
+                    progressStr = "100%";
+                } else {
+                    progressStr = "0%";
+                }
+
+                for (String line : visual.lore()) {
+                     String formatted = line.replace("%status%", status).replace("%progress%", progressStr);
+                     lore.add(plugin.getConfigManager().parse(formatted));
+                }
+
+                meta.lore(lore);
+                is.setItemMeta(meta);
+
+                inv.setItem(visual.slot(), is);
+            }
         }
     }
 

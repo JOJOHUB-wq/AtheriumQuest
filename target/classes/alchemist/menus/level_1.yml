@@ -1,0 +1,12 @@
+menu_title: "&#55FF55Алхимик | Уровень 1"
+size: 27
+items:
+  q1:
+    slot: 10
+    material: BREWING_STAND
+    name: "&#AAFF00Зельеварение"
+    lore:
+      - "&7Сварите 3 зелья"
+      - ""
+      - "&7Статус: %status%"
+      - "&7Прогресс: %progress%"

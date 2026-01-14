@@ -1,5 +1,6 @@
 package ua.atherium.atheriumquest.quest;
 
+import java.util.List;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -136,17 +137,22 @@ public class QuestListener implements Listener {
 
     private void checkNpcProgress(Player player, UserProfile profile, NpcType npcType, String type, String target, int amount) {
         int levelNum = profile.getLevel(npcType);
-        int questIndex = profile.getQuestIndex(npcType);
-        QuestLevel level = plugin.getQuestManager().getLevel(npcType, levelNum);
 
-        if (level == null) return;
-        if (questIndex >= level.getQuests().size()) return;
+        java.util.Map<String, Quest> levelQuests = plugin.getQuestManager().getLevelQuests(npcType, levelNum);
+        if (levelQuests == null) return;
+
+        List<String> questIds = new java.util.ArrayList<>(levelQuests.keySet());
+        int questIndex = profile.getQuestIndex(npcType);
+
+        if (questIndex >= questIds.size()) return;
+
+        String questId = questIds.get(questIndex);
+        Quest activeQuest = levelQuests.get(questId);
 
         if (npcType == NpcType.FARMER && levelNum == 1 && questIndex == 0) {
              boolean justStarted = true;
-             Quest firstQuest = level.getQuests().get(0);
-             for (int t = 0; t < firstQuest.getTasks().size(); t++) {
-                 if (profile.getProgress(npcType.name() + "_1_0_" + t) > 0) {
+             for (int t = 0; t < activeQuest.getTasks().size(); t++) {
+                 if (profile.getProgress(npcType.name() + "_1_" + questId + "_" + t) > 0) {
                      justStarted = false;
                      break;
                  }
@@ -156,31 +162,29 @@ public class QuestListener implements Listener {
              }
         }
 
-        Quest activeQuest = level.getQuests().get(questIndex);
-
         for (int t = 0; t < activeQuest.getTasks().size(); t++) {
             QuestTask task = activeQuest.getTasks().get(t);
             boolean typeMatch = task.getType().equalsIgnoreCase(type);
             boolean targetMatch = task.getTarget().isEmpty() || task.getTarget().equalsIgnoreCase(target);
 
             if (typeMatch && targetMatch) {
-                String key = npcType.name() + "_" + levelNum + "_" + questIndex + "_" + t;
+                String key = npcType.name() + "_" + levelNum + "_" + questId + "_" + t;
                 int current = profile.getProgress(key);
 
                 if (current < task.getAmount()) {
                     int newAmount = Math.min(current + amount, task.getAmount());
                     profile.setProgress(key, newAmount);
                     plugin.getUserManager().saveUser(player.getUniqueId());
-                    checkQuestCompletion(player, profile, npcType, level, activeQuest, questIndex);
+                    checkQuestCompletion(player, profile, npcType, questIds, activeQuest, questIndex, levelNum, questId);
                 }
             }
         }
     }
 
-    private void checkQuestCompletion(Player player, UserProfile profile, NpcType npcType, QuestLevel level, Quest quest, int questIndex) {
+    private void checkQuestCompletion(Player player, UserProfile profile, NpcType npcType, List<String> questIds, Quest quest, int questIndex, int levelNum, String questId) {
         boolean allComplete = true;
         for (int t = 0; t < quest.getTasks().size(); t++) {
-             String key = npcType.name() + "_" + level.getLevelNumber() + "_" + questIndex + "_" + t;
+             String key = npcType.name() + "_" + levelNum + "_" + questId + "_" + t;
              if (profile.getProgress(key) < quest.getTasks().get(t).getAmount()) {
                  allComplete = false;
                  break;
@@ -201,14 +205,14 @@ public class QuestListener implements Listener {
             int nextIndex = questIndex + 1;
             profile.setQuestIndex(npcType, nextIndex);
 
-            if (nextIndex >= level.getQuests().size()) {
-                profile.setLevel(npcType, level.getLevelNumber() + 1);
+            if (nextIndex >= questIds.size()) {
+                profile.setLevel(npcType, levelNum + 1);
                 profile.setQuestIndex(npcType, 0);
 
-                String msg = plugin.getConfigManager().getConfig().getString("messages.level_up", "Level {level}").replace("{level}", String.valueOf(level.getLevelNumber() + 1));
+                String msg = plugin.getConfigManager().getConfig().getString("messages.level_up", "Level {level}").replace("{level}", String.valueOf(levelNum + 1));
                 player.sendMessage(plugin.getConfigManager().parse(msg));
 
-                 if (npcType == NpcType.FARMER && level.getLevelNumber() == 3) {
+                 if (npcType == NpcType.FARMER && levelNum == 3) {
                      plugin.getDatabaseManager().getStorage().setQuestEnd(player.getUniqueId(), System.currentTimeMillis());
                 }
             }

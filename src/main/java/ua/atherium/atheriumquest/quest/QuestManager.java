@@ -3,6 +3,7 @@ package ua.atherium.atheriumquest.quest;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.bukkit.configuration.ConfigurationSection;
@@ -11,16 +12,14 @@ import ua.atherium.atheriumquest.AtheriumQuest;
 
 public class QuestManager {
     private final AtheriumQuest plugin;
-    private final Map<NpcType, Map<Integer, QuestLevel>> npcLevels = new HashMap<>();
-    private final Map<NpcType, Map<String, Quest>> questIdMap = new HashMap<>();
+    private final Map<NpcType, Map<Integer, Map<String, Quest>>> npcQuests = new HashMap<>();
 
     public QuestManager(AtheriumQuest plugin) {
         this.plugin = plugin;
     }
 
     public void loadQuests() {
-        npcLevels.clear();
-        questIdMap.clear();
+        npcQuests.clear();
         loadNpcQuest(NpcType.FARMER, "farmer.yml");
         loadNpcQuest(NpcType.ALCHEMIST, "alchemist.yml");
         loadNpcQuest(NpcType.WEAPONS, "weapons.yml");
@@ -33,55 +32,70 @@ public class QuestManager {
         }
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
 
-        Map<Integer, QuestLevel> levels = new HashMap<>();
-        Map<String, Quest> idMap = new HashMap<>();
+        Map<Integer, Map<String, Quest>> levels = new HashMap<>();
 
         for (String key : config.getKeys(false)) {
             if (key.startsWith("level_")) {
                 try {
                     int levelNum = Integer.parseInt(key.replace("level_", ""));
-                    List<Quest> levelQuests = new ArrayList<>();
 
-                    List<Map<?, ?>> list = config.getMapList(key + ".quests_list");
-                    for (Map<?, ?> qMap : list) {
-                        String id = (String) qMap.get("id");
-                        List<String> taskStrs = (List<String>) qMap.get("tasks");
-                        List<String> rewardStrs = (List<String>) qMap.get("rewards");
+                    ConfigurationSection questsListSec = config.getConfigurationSection(key + ".quests_list");
+                    Map<String, Quest> levelQuests = new LinkedHashMap<>();
 
-                        List<QuestTask> tasks = new ArrayList<>();
-                        for (String tStr : taskStrs) {
-                            String[] parts = tStr.split(" ");
-                            if (parts.length >= 2) {
-                                String tType = parts[0];
-                                int amount = Integer.parseInt(parts[1]);
-                                String target = "";
-                                if (parts.length > 2) target = parts[1];
-                                if (parts.length > 2) amount = Integer.parseInt(parts[2]);
-                                tasks.add(new QuestTask(tType, target, amount));
+                    if (questsListSec != null) {
+                        for (String qId : questsListSec.getKeys(false)) {
+                            ConfigurationSection qSec = questsListSec.getConfigurationSection(qId);
+                            if (qSec != null) {
+                                List<String> taskStrs = qSec.getStringList("tasks");
+                                List<String> rewardStrs = qSec.getStringList("rewards");
+
+                                List<QuestTask> tasks = new ArrayList<>();
+                                for (String tStr : taskStrs) {
+                                    String[] parts = tStr.split(" ");
+                                    if (parts.length >= 2) {
+                                        String tType = parts[0];
+                                        String target = "";
+                                        int amount = 0;
+
+                                        if (parts.length == 2) {
+                                            try {
+                                                amount = Integer.parseInt(parts[1]);
+                                            } catch (NumberFormatException e) {
+                                                target = parts[1];
+                                            }
+                                        } else if (parts.length > 2) {
+                                            target = parts[1];
+                                            amount = Integer.parseInt(parts[2]);
+                                        }
+
+                                        tasks.add(new QuestTask(tType, target, amount));
+                                    }
+                                }
+
+                                levelQuests.put(qId, new Quest(qId, tasks, rewardStrs));
                             }
                         }
-
-                        Quest quest = new Quest(id, tasks, rewardStrs);
-                        levelQuests.add(quest);
-                        idMap.put(id, quest);
                     }
 
-                    levels.put(levelNum, new QuestLevel(levelNum, levelQuests));
+                    levels.put(levelNum, levelQuests);
                 } catch (Exception e) {
-                    plugin.getLogger().severe("Error loading level " + key + " for " + type);
+                    plugin.getLogger().severe("Error loading " + key + " for " + type);
                     e.printStackTrace();
                 }
             }
         }
-        npcLevels.put(type, levels);
-        questIdMap.put(type, idMap);
+        npcQuests.put(type, levels);
     }
 
-    public QuestLevel getLevel(NpcType type, int level) {
-        return npcLevels.getOrDefault(type, new HashMap<>()).get(level);
+    public Map<String, Quest> getLevelQuests(NpcType type, int level) {
+        return npcQuests.getOrDefault(type, new HashMap<>()).get(level);
     }
 
-    public Quest getQuestById(NpcType type, String id) {
-        return questIdMap.getOrDefault(type, new HashMap<>()).get(id);
+    public Quest getQuest(NpcType type, int level, String questId) {
+        Map<String, Quest> levelMap = getLevelQuests(type, level);
+        if (levelMap != null) {
+            return levelMap.get(questId);
+        }
+        return null;
     }
 }

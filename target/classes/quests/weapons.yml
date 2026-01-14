@@ -1,6 +1,6 @@
 level_1:
   quests_list:
-    - id: "q1"
+    q1:
       tasks:
         - "kill_zombie 5"
       rewards:
@@ -8,7 +8,7 @@ level_1:
 
 level_2:
   quests_list:
-    - id: "q2"
+    q1:
       tasks:
         - "craft_sword 1"
       rewards:

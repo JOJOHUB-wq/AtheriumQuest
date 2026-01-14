@@ -1,0 +1,12 @@
+menu_title: "&#55FF55Алхимик | Уровень 2"
+size: 27
+items:
+  q1:
+    slot: 10
+    material: COOKED_BEEF
+    name: "&#AAFF00Дегустация"
+    lore:
+      - "&7Съешьте 10 еды"
+      - ""
+      - "&7Статус: %status%"
+      - "&7Прогресс: %progress%"

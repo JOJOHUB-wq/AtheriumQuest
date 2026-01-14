@@ -1,13 +1,13 @@
 level_1:
   quests_list:
-    - id: "q1"
+    q1:
       tasks:
         - "plant_potato 10"
         - "break_log 5"
       rewards:
         - "eco give %player_name% 100"
         - "msg %player_name% &#00FF00Квест 1 завершен!"
-    - id: "q2"
+    q2:
       tasks:
         - "harvest_wheat 20"
       rewards:
@@ -16,7 +16,7 @@ level_1:
 
 level_2:
   quests_list:
-    - id: "q3"
+    q1:
       tasks:
         - "shear_sheep 5"
       rewards:
