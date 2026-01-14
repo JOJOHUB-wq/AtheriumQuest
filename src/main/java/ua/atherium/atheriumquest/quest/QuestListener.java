@@ -9,6 +9,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.ItemStack;
 import ua.atherium.atheriumquest.AtheriumQuest;
 import ua.atherium.atheriumquest.user.UserProfile;
 
@@ -79,20 +82,18 @@ public class QuestListener implements Listener {
     }
 
     @EventHandler
-    public void onBrew(org.bukkit.event.inventory.BrewEvent event) {
-    }
+    public void onInventoryClick(InventoryClickEvent event) {
+        if (event.getClickedInventory() == null) return;
 
-    @EventHandler
-    public void onInventoryClick(org.bukkit.event.inventory.InventoryClickEvent event) {
-        if (event.getInventory().getType() == org.bukkit.event.inventory.InventoryType.BREWING) {
-            if (event.getSlotType() == org.bukkit.event.inventory.InventoryType.SlotType.RESULT && event.getCurrentItem() != null) {
+        if (event.getInventory().getType() == InventoryType.BREWING) {
+            if (event.getSlotType() == InventoryType.SlotType.RESULT && event.getCurrentItem() != null) {
                 if (event.getWhoClicked() instanceof Player player) {
                     handleProgress(player, "brew_potion", "", 1);
                 }
             }
         }
-        if (event.getInventory().getType() == org.bukkit.event.inventory.InventoryType.FURNACE) {
-             if (event.getSlotType() == org.bukkit.event.inventory.InventoryType.SlotType.RESULT && event.getCurrentItem() != null) {
+        if (event.getInventory().getType() == InventoryType.FURNACE) {
+             if (event.getSlotType() == InventoryType.SlotType.RESULT && event.getCurrentItem() != null) {
                  if (event.getCurrentItem().getType() == Material.IRON_INGOT) {
                      if (event.getWhoClicked() instanceof Player player) {
                          handleProgress(player, "smelt_iron", "", event.getCurrentItem().getAmount());
@@ -100,8 +101,8 @@ public class QuestListener implements Listener {
                  }
              }
         }
-        if (event.getInventory().getType() == org.bukkit.event.inventory.InventoryType.SMITHING) {
-             if (event.getSlotType() == org.bukkit.event.inventory.InventoryType.SlotType.RESULT && event.getCurrentItem() != null) {
+        if (event.getInventory().getType() == InventoryType.SMITHING) {
+             if (event.getSlotType() == InventoryType.SlotType.RESULT && event.getCurrentItem() != null) {
                  if (event.getWhoClicked() instanceof Player player) {
                      handleProgress(player, "upgrade_armor", "", 1);
                  }
