@@ -83,6 +83,10 @@ public class QuestListener implements Listener {
     }
 
     @EventHandler
+    public void onBrew(org.bukkit.event.inventory.BrewEvent event) {
+    }
+
+    @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getClickedInventory() == null) return;
 
@@ -138,7 +142,7 @@ public class QuestListener implements Listener {
     private void checkNpcProgress(Player player, UserProfile profile, NpcType npcType, String type, String target, int amount) {
         int levelNum = profile.getLevel(npcType);
 
-        java.util.Map<String, Quest> levelQuests = plugin.getQuestManager().getLevelQuests(npcType, levelNum);
+        java.util.Map<String, ua.atherium.atheriumquest.quest.Quest> levelQuests = plugin.getQuestManager().getLevelQuests(npcType, levelNum);
         if (levelQuests == null) return;
 
         List<String> questIds = new java.util.ArrayList<>(levelQuests.keySet());
@@ -147,7 +151,7 @@ public class QuestListener implements Listener {
         if (questIndex >= questIds.size()) return;
 
         String questId = questIds.get(questIndex);
-        Quest activeQuest = levelQuests.get(questId);
+        ua.atherium.atheriumquest.quest.Quest activeQuest = levelQuests.get(questId);
 
         if (npcType == NpcType.FARMER && levelNum == 1 && questIndex == 0) {
              boolean justStarted = true;
@@ -163,7 +167,7 @@ public class QuestListener implements Listener {
         }
 
         for (int t = 0; t < activeQuest.getTasks().size(); t++) {
-            QuestTask task = activeQuest.getTasks().get(t);
+            ua.atherium.atheriumquest.quest.QuestTask task = activeQuest.getTasks().get(t);
             boolean typeMatch = task.getType().equalsIgnoreCase(type);
             boolean targetMatch = task.getTarget().isEmpty() || task.getTarget().equalsIgnoreCase(target);
 
@@ -181,7 +185,7 @@ public class QuestListener implements Listener {
         }
     }
 
-    private void checkQuestCompletion(Player player, UserProfile profile, NpcType npcType, List<String> questIds, Quest quest, int questIndex, int levelNum, String questId) {
+    private void checkQuestCompletion(Player player, UserProfile profile, NpcType npcType, List<String> questIds, ua.atherium.atheriumquest.quest.Quest quest, int questIndex, int levelNum, String questId) {
         boolean allComplete = true;
         for (int t = 0; t < quest.getTasks().size(); t++) {
              String key = npcType.name() + "_" + levelNum + "_" + questId + "_" + t;
