@@ -1,10 +1,10 @@
 menu_title: "&#FF5555Оружейник | Уровень 1"
 size: 27
 items:
-  q1:
-    slot: 10
+  'q1':
     material: IRON_SWORD
-    name: "&#FF0000Охота на зомби"
+    slot: 10
+    display_name: "&#FF0000Охота на зомби"
     lore:
       - "&7Убейте 5 зомби"
       - ""

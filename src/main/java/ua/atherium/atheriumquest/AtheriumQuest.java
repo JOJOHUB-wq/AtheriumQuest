@@ -38,6 +38,7 @@ public class AtheriumQuest extends JavaPlugin {
         getServer().getPluginManager().registerEvents(shopEditorListener, this);
 
         getCommand("atq").setExecutor(new ua.atherium.atheriumquest.command.AdminCommand(this));
+        getCommand("atq").setTabCompleter(new ua.atherium.atheriumquest.command.AdminTabCompleter());
         getCommand("fermer").setExecutor(new ua.atherium.atheriumquest.command.MenuCommand(this, ua.atherium.atheriumquest.quest.NpcType.FARMER));
         getCommand("alximik").setExecutor(new ua.atherium.atheriumquest.command.MenuCommand(this, ua.atherium.atheriumquest.quest.NpcType.ALCHEMIST));
         getCommand("weapons").setExecutor(new ua.atherium.atheriumquest.command.MenuCommand(this, ua.atherium.atheriumquest.quest.NpcType.WEAPONS));

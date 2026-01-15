@@ -1,5 +1,6 @@
 ua/atherium/atheriumquest/gui/MenuManager$MenuConfig.class
 ua/atherium/atheriumquest/command/AdminCommand.class
+ua/atherium/atheriumquest/command/AdminTabCompleter.class
 ua/atherium/atheriumquest/quest/QuestTask.class
 ua/atherium/atheriumquest/database/DatabaseManager.class
 ua/atherium/atheriumquest/quest/QuestManager.class

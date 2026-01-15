@@ -53,11 +53,14 @@ public class MenuManager {
 
                             ConfigurationSection is = config.getConfigurationSection(key);
                             if (is != null) {
+                                String name = is.getString("display_name");
+                                if (name == null) name = is.getString("name", "Unknown");
+
                                 items.put(key, new QuestMenuItem(
                                     key,
                                     is.getInt("slot"),
                                     Material.valueOf(is.getString("material", "STONE")),
-                                    is.getString("name"),
+                                    name,
                                     is.getStringList("lore")
                                 ));
                             }

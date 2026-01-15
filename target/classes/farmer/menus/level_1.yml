@@ -1,20 +1,20 @@
 menu_title: "&#FF5555Фермер | Уровень 1"
 size: 27
 items:
-  q1:
-    slot: 10
+  'q1':
     material: POTATO
-    name: "&#FFAA00Первое задание"
+    slot: 10
+    display_name: "&#FFAA00Первое задание"
     lore:
       - "&7Посадите 10 картофеля"
       - "&7Срубите 5 дерева"
       - ""
       - "&7Статус: %status%"
       - "&7Прогресс: %progress%"
-  q2:
-    slot: 11
+  'q2':
     material: WHEAT
-    name: "&#FFAA00Второе задание"
+    slot: 11
+    display_name: "&#FFAA00Второе задание"
     lore:
       - "&7Соберите 20 пшеницы"
       - ""

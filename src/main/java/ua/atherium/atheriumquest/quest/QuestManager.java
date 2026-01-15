@@ -20,15 +20,15 @@ public class QuestManager {
 
     public void loadQuests() {
         npcQuests.clear();
-        loadNpcQuest(NpcType.FARMER, "farmer.yml");
-        loadNpcQuest(NpcType.ALCHEMIST, "alchemist.yml");
-        loadNpcQuest(NpcType.WEAPONS, "weapons.yml");
+        loadNpcQuest(NpcType.FARMER, "farmer");
+        loadNpcQuest(NpcType.ALCHEMIST, "alchemist");
+        loadNpcQuest(NpcType.WEAPONS, "weapons");
     }
 
-    private void loadNpcQuest(NpcType type, String fileName) {
-        File file = new File(plugin.getDataFolder(), "quests/" + fileName);
+    private void loadNpcQuest(NpcType type, String folderName) {
+        File file = new File(plugin.getDataFolder(), folderName + "/quests.yml");
         if (!file.exists()) {
-            plugin.saveResource("quests/" + fileName, false);
+            plugin.saveResource(folderName + "/quests.yml", false);
         }
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
 

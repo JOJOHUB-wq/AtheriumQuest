@@ -1,6 +1,7 @@
 /app/src/main/java/ua/atherium/atheriumquest/AtheriumQuest.java
 /app/src/main/java/ua/atherium/atheriumquest/ConfigManager.java
 /app/src/main/java/ua/atherium/atheriumquest/command/AdminCommand.java
+/app/src/main/java/ua/atherium/atheriumquest/command/AdminTabCompleter.java
 /app/src/main/java/ua/atherium/atheriumquest/command/MenuCommand.java
 /app/src/main/java/ua/atherium/atheriumquest/command/NpcCommand.java
 /app/src/main/java/ua/atherium/atheriumquest/database/DatabaseManager.java

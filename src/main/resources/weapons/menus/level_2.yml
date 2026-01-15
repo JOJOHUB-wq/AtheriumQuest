@@ -1,10 +1,10 @@
 menu_title: "&#FF5555Оружейник | Уровень 2"
 size: 27
 items:
-  q1:
-    slot: 10
+  'q1':
     material: CRAFTING_TABLE
-    name: "&#FF0000Ковка"
+    slot: 10
+    display_name: "&#FF0000Ковка"
     lore:
       - "&7Скрафтите меч"
       - ""
