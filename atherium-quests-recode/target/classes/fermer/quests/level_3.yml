@@ -1,0 +1,58 @@
+quests:
+  quest_1:
+    type: "plant_blocks"
+    material: "CARROT"
+    amount: 10
+    reward_commands:
+      - "[console] eco give %player% 100"
+      - "[message] §aКвест выполнен!"
+    display_name: "<gradient:#00FF00:#00FFFF>Квест 1"
+    lore:
+      - "§7Задание: Посадить морковь"
+      - "§eПрогресс: §f%atherium_quest_progress_1%/10"
+    completed_display_name: "§a✓ Квест 1"
+    completed_lore: ["§aВыполнено!"]
+    locked_display_name: "§c✘ Заблокировано"
+    locked_lore: ["§cВыполните предыдущий квест"]
+    material: "CARROT"
+    completed_material: "CARROT"
+    locked_material: "BARRIER"
+
+  quest_2:
+    type: "collect_items"
+    material: "PUMPKIN"
+    amount: 32
+    reward_commands:
+      - "[console] eco give %player% 200"
+      - "[message] §aКвест выполнен!"
+    display_name: "<gradient:#00FF00:#00FFFF>Квест 2"
+    lore:
+      - "§7Задание: Собрать тыквы"
+      - "§eПрогресс: §f%atherium_quest_progress_2%/32"
+    completed_display_name: "§a✓ Квест 2"
+    completed_lore: ["§aВыполнено!"]
+    locked_display_name: "§c✘ Заблокировано"
+    locked_lore: ["§cВыполните предыдущий квест"]
+    material: "PUMPKIN"
+    completed_material: "PUMPKIN"
+    locked_material: "BARRIER"
+
+  quest_3:
+    type: "breed_animals"
+    material: "COW"
+    amount: 5
+    reward_commands:
+      - "[console] eco give %player% 500"
+      - "[message] §aУровень завершен!"
+      - "[close]"
+    display_name: "<gradient:#00FF00:#00FFFF>Квест 3"
+    lore:
+      - "§7Задание: Развести коров"
+      - "§eПрогресс: §f%atherium_quest_progress_3%/5"
+    completed_display_name: "§a✓ Квест 3"
+    completed_lore: ["§aВыполнено!"]
+    locked_display_name: "§c✘ Заблокировано"
+    locked_lore: ["§cВыполните предыдущий квест"]
+    material: "COW"
+    completed_material: "COW"
+    locked_material: "BARRIER"

@@ -1,0 +1,32 @@
+menu_title: "<gradient:#FF0000:#FF6B6B>Оружейник - Уровень 3</gradient>"
+size: 54
+items:
+  quest_1_slot:
+    slot: 10
+    quest: 1
+    update_interval: 20
+  quest_2_slot:
+    slot: 11
+    quest: 2
+    update_interval: 20
+  quest_3_slot:
+    slot: 12
+    quest: 3
+    update_interval: 20
+  glass_pane:
+    slots: [0,1,2,3,4,5,6,7,8,9,17,18,26,27,35,36,44,45,46,47,48,50,51,52,53]
+    material: "GRAY_STAINED_GLASS_PANE"
+    display_name: " "
+  info:
+    slot: 4
+    material: "BOOK"
+    display_name: "§e§lИнформация"
+    lore:
+      - "§7Текущий уровень: §a3"
+      - "§7Прогресс: §f%atherium_weapons_progress%"
+  back_button:
+    slot: 49
+    material: "ARROW"
+    display_name: "§cНазад"
+    lore: ["§7Вернуться в меню"]
+    click_commands: ["[player] quests"]

@@ -1,0 +1,113 @@
+# ═══════════════════════════════════════════════════════════
+#           AtheriumQuests - Главный конфиг
+#           Автор: Oleze_bebidjonov
+# ═══════════════════════════════════════════════════════════
+
+# Префикс плагина (поддержка RGB)
+prefix: "<gradient:#FF6B6B:#4ECDC4>AtheriumQuests</gradient> §8»"
+
+# ═══════════════════════════════════════════════════════════
+#                    Сообщения
+# ═══════════════════════════════════════════════════════════
+
+messages:
+  # Квесты
+  quest_completed: "%prefix% §aВы выполнили квест: §f%quest_name%"
+  quest_started: "%prefix% §eНовый квест доступен: §f%quest_name%"
+  quest_progress: "%prefix% §7Прогресс квеста §f%quest_name%§7: §e%current%§7/§e%required%"
+  quest_locked: "%prefix% §cСначала выполните предыдущий квест!"
+
+  # Уровни
+  level_completed: "%prefix% §a§lПоздравляем! Уровень %level% завершен!"
+  level_unlocked: "%prefix% §aДобро пожаловать на %level% уровень квестов!"
+  all_quests_completed: "%prefix% §6§lВы завершили все квесты этого NPC!"
+
+  # Магазин
+  shop_item_purchased: "%prefix% §aВы купили §f%amount%x %item% §aза §6%price% монет"
+  shop_item_locked: "%prefix% §cЭтот товар заблокирован! Пройдите %required% полных уровней."
+  shop_sold_out: "%prefix% §cТовар раскуплен! Обновление через: %time%"
+  shop_insufficient_funds: "%prefix% §cНедостаточно средств! Нужно: §6%price% монет"
+  shop_inventory_full: "%prefix% §cУ вас полный инвентарь!"
+
+  # Админ команды
+  admin_skip_success: "%prefix% §aПропущено %amount% квестов для игрока %player% (NPC: %npc%)"
+  admin_skip_player_not_found: "%prefix% §cИгрок не найден!"
+  admin_skip_invalid_npc: "%prefix% §cНеверный NPC! Используйте: fermer, alximik, weapons"
+  admin_reload_success: "%prefix% §aВсе конфигурации успешно перезагружены!"
+  admin_shop_item_added: "%prefix% §aТовар успешно добавлен в магазин!"
+  admin_shop_cancelled: "%prefix% §cДобавление товара отменено."
+  admin_shop_timeout: "%prefix% §cВремя ожидания истекло. Попробуйте снова."
+
+  # Ошибки
+  no_permission: "%prefix% §cУ вас нет прав на использование этой команды!"
+  player_only: "%prefix% §cЭта команда доступна только игрокам!"
+  invalid_command: "%prefix% §cНеверная команда! Используйте §e/atq help"
+
+# ═══════════════════════════════════════════════════════════
+#                  Система хранения
+# ═══════════════════════════════════════════════════════════
+
+storage:
+  type: "YAML" # YAML, SQLITE, MYSQL
+
+  # MySQL настройки
+  mysql:
+    host: "localhost"
+    port: 3306
+    database: "atherium"
+    username: "root"
+    password: "password"
+    table_prefix: "atq_"
+    pool_size: 10
+
+  # SQLite настройки
+  sqlite:
+    file: "data.db"
+
+  # YAML настройки
+  yaml:
+    folder: "data"
+    auto_save_interval: 300 # Авто-сохранение каждые 5 минут (в секундах)
+
+# ═══════════════════════════════════════════════════════════
+#                    Экономика
+# ═══════════════════════════════════════════════════════════
+
+economy:
+  enabled: true
+  currency_symbol: "монет"
+  vault_required: true
+
+# ═══════════════════════════════════════════════════════════
+#                Настройки по умолчанию
+# ═══════════════════════════════════════════════════════════
+
+defaults:
+  quest_check_interval: 20 # Тики между проверками прогресса квестов (20 = 1 сек)
+  shop_update_interval: 20 # Тики между обновлением таймеров магазина (20 = 1 сек)
+  menu_update_interval: 20 # Тики между обновлением меню (20 = 1 сек)
+
+  # Звуки
+  sounds:
+    quest_completed: "ENTITY_PLAYER_LEVELUP"
+    level_completed: "UI_TOAST_CHALLENGE_COMPLETE"
+    shop_purchase: "ENTITY_EXPERIENCE_ORB_PICKUP"
+    shop_error: "ENTITY_VILLAGER_NO"
+    menu_click: "UI_BUTTON_CLICK"
+
+# ═══════════════════════════════════════════════════════════
+#                      Debug
+# ═══════════════════════════════════════════════════════════
+
+debug:
+  enabled: false # Включить debug логи в консоль
+  log_quest_progress: false # Логировать прогресс квестов
+  log_shop_purchases: false # Логировать покупки в магазине
+  log_menu_actions: false # Логировать действия в меню
+
+# ═══════════════════════════════════════════════════════════
+#                PlaceholderAPI
+# ═══════════════════════════════════════════════════════════
+
+placeholderapi:
+  enabled: true # Включить PlaceholderAPI хук

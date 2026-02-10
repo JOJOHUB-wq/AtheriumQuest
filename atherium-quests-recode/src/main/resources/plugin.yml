@@ -1,0 +1,40 @@
+name: AtheriumQuests
+version: 1.0-SNAPSHOT
+main: ua.atherium.atheriumquest.AtheriumQuests
+api-version: 1.21
+authors: [Oleze_bebidjonov]
+description: AtheriumQuests Plugin for Paper 1.21.1
+softdepend: [Vault, PlaceholderAPI]
+
+commands:
+  atq:
+    description: Админ команды плагина
+    permission: atherium.admin
+    usage: /atq help
+  fermer:
+    description: Открыть меню фермера
+    usage: /fermer
+  alximik:
+    description: Открыть меню алхимика
+    usage: /alximik
+  weapons:
+    description: Открыть меню оружейника
+    usage: /weapons
+  quests:
+    description: Открыть меню квестов
+    aliases: [quest]
+    usage: /quests
+
+permissions:
+  atherium.admin:
+    description: Полный доступ к админ командам
+    default: op
+  atherium.admin.skip:
+    description: Доступ к команде /atq skip
+    default: op
+  atherium.admin.reload:
+    description: Доступ к команде /atq reload
+    default: op
+  atherium.admin.shop:
+    description: Доступ к команде /atq shop
+    default: op

@@ -1,0 +1,103 @@
+# ═══════════════════════════════════════════════════════════
+#          AtheriumQuests - Главное меню выбора NPC
+# ═══════════════════════════════════════════════════════════
+
+menu_title: "<gradient:#FF6B6B:#4ECDC4>Выберите персонажа</gradient>"
+size: 27
+
+items:
+  # Фермер
+  fermer:
+    slot: 11
+    material: "WHEAT"
+    display_name: "<gradient:#00FF00:#00FFFF>§lФермер</gradient>"
+    lore:
+      - "§7Квесты связанные с фермерством"
+      - "§7и сельским хозяйством"
+      - ""
+      - "§eТекущий уровень: §f%atherium_fermer_level%"
+      - "§eПрогресс: §f%atherium_fermer_progress%"
+      - "§eЗавершено уровней: §f%atherium_fermer_completed%§7/§f3"
+      - ""
+      - "§a▸ Нажмите чтобы открыть"
+    enchanted: false
+    click_commands:
+      - "[player] fermer"
+      - "[sound] UI_BUTTON_CLICK"
+    update_interval: 20
+
+  # Алхимик
+  alximik:
+    slot: 13
+    material: "BREWING_STAND"
+    display_name: "<gradient:#FF00FF:#FF6BFF>§lАлхимик</gradient>"
+    lore:
+      - "§7Квесты связанные с алхимией"
+      - "§7и варкой зелий"
+      - ""
+      - "§eТекущий уровень: §f%atherium_alximik_level%"
+      - "§eПрогресс: §f%atherium_alximik_progress%"
+      - "§eЗавершено уровней: §f%atherium_alximik_completed%§7/§f3"
+      - ""
+      - "§a▸ Нажмите чтобы открыть"
+    enchanted: false
+    click_commands:
+      - "[player] alximik"
+      - "[sound] UI_BUTTON_CLICK"
+    update_interval: 20
+
+  # Оружейник
+  weapons:
+    slot: 15
+    material: "DIAMOND_SWORD"
+    display_name: "<gradient:#FF0000:#FF6B6B>§lОружейник</gradient>"
+    lore:
+      - "§7Квесты связанные с оружием"
+      - "§7и сражениями"
+      - ""
+      - "§eТекущий уровень: §f%atherium_weapons_level%"
+      - "§eПрогресс: §f%atherium_weapons_progress%"
+      - "§eЗавершено уровней: §f%atherium_weapons_completed%§7/§f3"
+      - ""
+      - "§a▸ Нажмите чтобы открыть"
+    enchanted: false
+    click_commands:
+      - "[player] weapons"
+      - "[sound] UI_BUTTON_CLICK"
+    update_interval: 20
+
+  # Магазин
+  shop:
+    slot: 22
+    material: "EMERALD"
+    display_name: "<gradient:#FFD700:#FFA500>§lМагазин квестов</gradient>"
+    lore:
+      - "§7Покупайте уникальные предметы"
+      - "§7за валюту сервера"
+      - ""
+      - "§7Открывается по мере"
+      - "§7прохождения квестов"
+      - ""
+      - "§a▸ Нажмите чтобы открыть"
+    enchanted: true
+    click_commands:
+      - "[player] quest shop"
+      - "[sound] UI_BUTTON_CLICK"
+
+  # Декоративные элементы
+  glass_border:
+    slots: [0,1,2,3,4,5,6,7,8,9,17,18,26]
+    material: "GRAY_STAINED_GLASS_PANE"
+    display_name: " "
+
+  # Информация
+  info:
+    slot: 4
+    material: "BOOK"
+    display_name: "§e§lИнформация"
+    lore:
+      - "§7Всего выполнено квестов: §e%atherium_total_quests%"
+      - "§7Всего завершено уровней: §e%atherium_total_levels%§7/§e9"
+      - ""
+      - "§7Выполняйте квесты чтобы"
+      - "§7разблокировать товары в магазине!"
