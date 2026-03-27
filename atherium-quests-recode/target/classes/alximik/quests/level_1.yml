@@ -1,0 +1,58 @@
+quests:
+  quest_1:
+    type: "collect_items"
+    material: "NETHER_WART"
+    amount: 10
+    reward_commands:
+      - "[console] eco give %player% 100"
+      - "[message] §aКвест выполнен!"
+    display_name: "<gradient:#FF00FF:#FF6BFF>Квест 1"
+    lore:
+      - "§7Задание: Собрать адский нарост"
+      - "§eПрогресс: §f%atherium_quest_progress_1%/10"
+    completed_display_name: "§a✓ Квест 1"
+    completed_lore: ["§aВыполнено!"]
+    locked_display_name: "§c✘ Заблокировано"
+    locked_lore: ["§cВыполните предыдущий квест"]
+    material: "NETHER_WART"
+    completed_material: "NETHER_WART"
+    locked_material: "BARRIER"
+
+  quest_2:
+    type: "brew_potions"
+    material: "SPEED"
+    amount: 3
+    reward_commands:
+      - "[console] eco give %player% 200"
+      - "[message] §aКвест выполнен!"
+    display_name: "<gradient:#FF00FF:#FF6BFF>Квест 2"
+    lore:
+      - "§7Задание: Сварить зелье скорости"
+      - "§eПрогресс: §f%atherium_quest_progress_2%/3"
+    completed_display_name: "§a✓ Квест 2"
+    completed_lore: ["§aВыполнено!"]
+    locked_display_name: "§c✘ Заблокировано"
+    locked_lore: ["§cВыполните предыдущий квест"]
+    material: "SPEED"
+    completed_material: "SPEED"
+    locked_material: "BARRIER"
+
+  quest_3:
+    type: "kill_mobs"
+    material: "WITCH"
+    amount: 5
+    reward_commands:
+      - "[console] eco give %player% 500"
+      - "[message] §aУровень завершен!"
+      - "[close]"
+    display_name: "<gradient:#FF00FF:#FF6BFF>Квест 3"
+    lore:
+      - "§7Задание: Убить ведьм"
+      - "§eПрогресс: §f%atherium_quest_progress_3%/5"
+    completed_display_name: "§a✓ Квест 3"
+    completed_lore: ["§aВыполнено!"]
+    locked_display_name: "§c✘ Заблокировано"
+    locked_lore: ["§cВыполните предыдущий квест"]
+    material: "WITCH"
+    completed_material: "WITCH"
+    locked_material: "BARRIER"

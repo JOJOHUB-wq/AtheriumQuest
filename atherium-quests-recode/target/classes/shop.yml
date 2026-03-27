@@ -1,0 +1,113 @@
+# ═══════════════════════════════════════════════════════════
+#           AtheriumQuests - Магазин квестов
+# ═══════════════════════════════════════════════════════════
+
+menu_title: "<gradient:#FFD700:#FFA500>Магазин квестов</gradient>"
+size: 27 # Настраивается
+
+items:
+  # Предмет фермера - уровень 1
+  stone:
+    slot: 0
+    material: "STONE"
+    amount: 1
+    display_name: "§fКамень"
+    lore:
+      - "§7Обычный камень"
+      - ""
+      - "§eЦена: §61 монета за 1 шт"
+      - "§aДоступно: §f%available%§7/§f%max%"
+      - "§7Обновление через: §e%timer%"
+      - ""
+      - "§7Нажмите чтобы купить"
+    price: 1 # Цена за 1 шт в монетах (Vault)
+    max_purchase: 10 # Сколько можно купить всего за один цикл
+    refresh_time: 3600 # Через сколько секунд обновится (3600 = 1 час)
+    required_levels_completed: 1 # Сколько ПОЛНЫХ уровней надо пройти
+    npc: "fermer" # К какому NPC относится (fermer/alximik/weapons)
+
+    # Если игрок не прошел нужное количество полных уровней:
+    locked_material: "BARRIER"
+    locked_display_name: "§c✘ Заблокировано"
+    locked_lore:
+      - "§cПройдите %required% полных уровней фермера"
+      - "§7Ваш прогресс: §e%player_completed%§7/§e%required%"
+
+    # Если товар раскуплен:
+    sold_out_display_name: "§c✘ Раскуплено"
+    sold_out_lore:
+      - "§cВсе раскуплено!"
+      - "§7Появится в ассортименте через:"
+      - "§e%timer%"
+
+  # Предмет фермера - уровень 2
+  wheat:
+    slot: 1
+    material: "WHEAT"
+    amount: 1
+    display_name: "§ePшеница"
+    lore:
+      - "§7Свежая пшеница"
+      - ""
+      - "§eЦена: §650 монет за 1 шт"
+      - "§aДоступно: §f%available%§7/§f%max%"
+      - "§7Обновление через: §e%timer%"
+    price: 50
+    max_purchase: 5
+    refresh_time: 7200 # 2 часа
+    required_levels_completed: 2
+    npc: "fermer"
+    locked_material: "BARRIER"
+    locked_display_name: "§c✘ Заблокировано"
+    locked_lore:
+      - "§cПройдите 2 полных уровня фермера"
+
+  # Предмет алхимика
+  potion:
+    slot: 3
+    material: "POTION"
+    amount: 1
+    display_name: "§dЗелье скорости"
+    lore:
+      - "§7Увеличивает скорость"
+      - ""
+      - "§eЦена: §6200 монет за 1 шт"
+      - "§aДоступно: §f%available%§7/§f%max%"
+      - "§7Обновление через: §e%timer%"
+    price: 200
+    max_purchase: 3
+    refresh_time: 1800 # 30 минут
+    required_levels_completed: 1
+    npc: "alximik"
+    locked_material: "BARRIER"
+    locked_display_name: "§c✘ Заблокировано"
+    locked_lore:
+      - "§cПройдите 1 полный уровень алхимика"
+
+  # Предмет оружейника
+  diamond_sword:
+    slot: 6
+    material: "DIAMOND_SWORD"
+    amount: 1
+    display_name: "§bАлмазный меч"
+    lore:
+      - "§7Прочный алмазный меч"
+      - ""
+      - "§eЦена: §61000 монет за 1 шт"
+      - "§aДоступно: §f%available%§7/§f%max%"
+      - "§7Обновление через: §e%timer%"
+    price: 1000
+    max_purchase: 1
+    refresh_time: 86400 # 24 часа
+    required_levels_completed: 3
+    npc: "weapons"
+    locked_material: "BARRIER"
+    locked_display_name: "§c✘ Заблокировано"
+    locked_lore:
+      - "§cПройдите 3 полных уровня оружейника"
+
+  # Декорация
+  glass_pane:
+    slots: [9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
+    material: "BLACK_STAINED_GLASS_PANE"
+    display_name: " "

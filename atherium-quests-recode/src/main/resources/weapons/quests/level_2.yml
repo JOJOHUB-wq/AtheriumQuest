@@ -1,0 +1,58 @@
+quests:
+  quest_1:
+    type: "craft_items"
+    material: "IRON_SWORD"
+    amount: 1
+    reward_commands:
+      - "[console] eco give %player% 100"
+      - "[message] §aКвест выполнен!"
+    display_name: "<gradient:#FF0000:#FF6B6B>Квест 1"
+    lore:
+      - "§7Задание: Скрафтить железный меч"
+      - "§eПрогресс: §f%atherium_quest_progress_1%/1"
+    completed_display_name: "§a✓ Квест 1"
+    completed_lore: ["§aВыполнено!"]
+    locked_display_name: "§c✘ Заблокировано"
+    locked_lore: ["§cВыполните предыдущий квест"]
+    material: "IRON_SWORD"
+    completed_material: "IRON_SWORD"
+    locked_material: "BARRIER"
+
+  quest_2:
+    type: "kill_mobs"
+    material: "SKELETON"
+    amount: 15
+    reward_commands:
+      - "[console] eco give %player% 200"
+      - "[message] §aКвест выполнен!"
+    display_name: "<gradient:#FF0000:#FF6B6B>Квест 2"
+    lore:
+      - "§7Задание: Убить скелетов"
+      - "§eПрогресс: §f%atherium_quest_progress_2%/15"
+    completed_display_name: "§a✓ Квест 2"
+    completed_lore: ["§aВыполнено!"]
+    locked_display_name: "§c✘ Заблокировано"
+    locked_lore: ["§cВыполните предыдущий квест"]
+    material: "SKELETON"
+    completed_material: "SKELETON"
+    locked_material: "BARRIER"
+
+  quest_3:
+    type: "damage_dealt"
+    material: "ANY"
+    amount: 1000
+    reward_commands:
+      - "[console] eco give %player% 500"
+      - "[message] §aУровень завершен!"
+      - "[close]"
+    display_name: "<gradient:#FF0000:#FF6B6B>Квест 3"
+    lore:
+      - "§7Задание: Нанести 1000 урона"
+      - "§eПрогресс: §f%atherium_quest_progress_3%/1000"
+    completed_display_name: "§a✓ Квест 3"
+    completed_lore: ["§aВыполнено!"]
+    locked_display_name: "§c✘ Заблокировано"
+    locked_lore: ["§cВыполните предыдущий квест"]
+    material: "ANY"
+    completed_material: "ANY"
+    locked_material: "BARRIER"

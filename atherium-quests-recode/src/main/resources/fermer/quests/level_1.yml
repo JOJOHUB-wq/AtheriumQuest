@@ -1,0 +1,144 @@
+# /fermer/quests/level_1.yml
+
+quests:
+  # ════════════════════════════════════════
+  #  Квест 1: Посадка картофеля
+  # ════════════════════════════════════════
+  quest_1:
+    # Тип квеста
+    type: "plant_blocks"
+    material: "POTATO"
+    amount: 5
+
+    # Награды (DeluxeMenus синтаксис)
+    reward_commands:
+      - "[console] give %player% diamond 1"
+      - "[console] eco give %player% 100"
+      - "[message] <gradient:#00FF00:#00FFFF>Вы выполнили квест!</gradient>"
+      - "[message] §aПолучено: §f1x Алмаз, §6100 монет"
+      - "[sound] ENTITY_PLAYER_LEVELUP-1.0-1.0"
+      - "[actionbar] <#FFD700>+100 монет | +1 Алмаз"
+      - "[particle] VILLAGER_HAPPY-10-0.5-1.0-0.5"
+
+    # Отображение квеста (активный)
+    display_name: "<gradient:#00FF00:#00FFFF>Посадить картофель</gradient>"
+    lore:
+      - "§7Посадите §e5 картофеля"
+      - "§7на своей ферме"
+      - ""
+      - "§eПрогресс: §f%atherium_quest_progress_1%§7/§f5"
+      - ""
+      - "§eНаграда:"
+      - "§7  ▸ 1x §bАлмаз"
+      - "§7  ▸ §6100 монет"
+      - ""
+      - "§a§l▸ Активный квест"
+    material: "POTATO"
+    enchanted: true
+
+    # Отображение квеста (выполненный)
+    completed_display_name: "§a✓ Посадить картофель"
+    completed_lore:
+      - "§aВыполнено!"
+      - "§7Вы получили награду"
+      - ""
+      - "§7Награда:"
+      - "§7  ▸ 1x §bАлмаз"
+      - "§7  ▸ §6100 монет"
+    completed_material: "POTATO"
+    completed_enchanted: false
+
+    # Отображение квеста (заблокированный)
+    locked_display_name: "§c✘ Заблокировано"
+    locked_lore:
+      - "§cСначала выполните"
+      - "§cпредыдущий квест!"
+    locked_material: "BARRIER"
+    locked_enchanted: false
+
+  # ════════════════════════════════════════
+  #  Квест 2: Сбор пшеницы
+  # ════════════════════════════════════════
+  quest_2:
+    type: "collect_items"
+    material: "WHEAT"
+    amount: 64
+
+    reward_commands:
+      - "[console] give %player% emerald 5"
+      - "[console] eco give %player% 250"
+      - "[title] <gradient:#FFD700:#FFA500>Квест выполнен!</gradient>;&aПолучено 5 изумрудов"
+      - "[sound] ENTITY_EXPERIENCE_ORB_PICKUP-1.0-1.2"
+      - "[message] §aВы получили §25 изумрудов §aи §6250 монет§a!"
+
+    display_name: "<gradient:#FFD700:#FFA500>Собрать пшеницу</gradient>"
+    lore:
+      - "§7Соберите §e64 пшеницы"
+      - "§7с полей"
+      - ""
+      - "§eПрогресс: §f%atherium_quest_progress_2%§7/§f64"
+      - ""
+      - "§eНаграда:"
+      - "§7  ▸ 5x §2Изумруд"
+      - "§7  ▸ §6250 монет"
+      - ""
+      - "§a§l▸ Активный квест"
+    material: "WHEAT"
+    enchanted: true
+
+    completed_display_name: "§a✓ Собрать пшеницу"
+    completed_lore:
+      - "§aВыполнено!"
+      - "§7Вы получили награду"
+    completed_material: "WHEAT"
+
+    locked_display_name: "§c✘ Заблокировано"
+    locked_lore:
+      - "§cСначала выполните квест:"
+      - "§e▸ Посадить картофель"
+    locked_material: "BARRIER"
+
+  # ════════════════════════════════════════
+  #  Квест 3: Убийство зомби (финальный)
+  # ════════════════════════════════════════
+  quest_3:
+    type: "kill_mobs"
+    mob_type: "ZOMBIE"
+    amount: 20
+
+    reward_commands:
+      - "[console] give %player% diamond_sword 1"
+      - "[console] eco give %player% 500"
+      - "[title] <gradient:#FF0000:#FF6B6B>§lУРОВЕНЬ 1 ЗАВЕРШЕН!</gradient>;&aПереходите на уровень 2"
+      - "[sound] UI_TOAST_CHALLENGE_COMPLETE-1.0-1.0"
+      - "[delay] 20"
+      - "[broadcast] <gradient:#FFD700:#FFA500>%player%</gradient> §7завершил §aпервый уровень §7фермера!"
+      - "[particle] FIREWORKS_SPARK-50-1.0-2.0-1.0"
+      - "[delay] 40"
+      - "[close]"
+
+    display_name: "<gradient:#FF0000:#FF6B6B>Убить зомби</gradient>"
+    lore:
+      - "§7Убейте §c20 зомби"
+      - ""
+      - "§eПрогресс: §f%atherium_quest_progress_3%§7/§f20"
+      - ""
+      - "§eНаграда:"
+      - "§7  ▸ 1x §bАлмазный меч"
+      - "§7  ▸ §6500 монет"
+      - ""
+      - "§6§l▸ Финальный квест уровня!"
+    material: "ZOMBIE_HEAD"
+    enchanted: true
+
+    completed_display_name: "§a✓ Убить зомби"
+    completed_lore:
+      - "§a§lВыполнено!"
+      - "§7Уровень 1 завершен"
+    completed_material: "ZOMBIE_HEAD"
+
+    locked_display_name: "§c✘ Заблокировано"
+    locked_lore:
+      - "§cСначала выполните квест:"
+      - "§e▸ Собрать пшеницу"
+    locked_material: "BARRIER"
